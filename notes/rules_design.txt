@@ -1,0 +1,56 @@
+#version 26.2
+
+<html>     
+<head/>
+<body> 
+  <h1>Articlemanager</h1> 
+  <label>name:
+    <input type="text" id="articlegroup" value="default"/>
+  </label>
+  <div id="articles">
+    <div id="article_">
+      <div id="article_name_"/>
+      <input type="checkbox" id="bestellen" checked="0"/>
+      <label for="bestellen">in den Warenkorb</label>
+    <div>
+  </div>
+  <div id="articles_add">
+    <input type="text" id="article_name"/>
+    <input type="submit" id="article_add"/>
+  </div>
+</body>
+</html>
+
+RULE:    1
+INFO:    Aktualisation von Artikelgruppe
+XPATH:   /html/body/label[1]/input[1]
+REQUEST:             MODEL: get_articlegroup_name
+             MODELDATA2DOM: articlegroup_name=>./@value
+USER-ACTION:         EVENT: @onchange
+             DOMDATA2MODEL: ./@value=>articlegroup_name
+                     MODEL: set_articlegroup_name
+        
+Rule:    2
+Info:    Artikel Bestellung wählen/abwählen
+Xpath:   /html/body/div[id="articles"]/div[id="article"]
+REQUEST: MODEL: get_article__ordered
+         Pass:  articlegroup=%articlegroup%
+         Map:   name=>div/text()
+                ordered=>input/@checked
+                @id_{number}=>@id
+                number=>input/@data-dontcode-list
+Release: set_article__ordered     
+         Pass:  ordered=>input/@checked
+                number=>input/@data-dontcode-list
+                %articlegroup%=>div[id='article_name']
+         Event: @onclick 
+
+Rule:    3
+Info:    Artikel hinzufügen
+Xpath:   /html/body/div["articles_add"]
+Provide: Map: 'Artikelname_neu'=>input['articlename']/@value
+Release: add_article
+         Pass:  input['article_name']/@value=>articlename
+                %articlegroup%=>articlegroup
+         Event: input['article_add']/@onclick
+              
