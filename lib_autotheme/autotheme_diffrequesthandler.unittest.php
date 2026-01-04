@@ -17,7 +17,7 @@
     echo '<html>';
     echo '<head>';
     echo '<title>version '.$version.'</title>';
-    echo '<script language="javascript" type="text/javascript" src="https://'.$dir.'/dontcode_diffrequesthandler.js" defer></script>';
+    echo '<script language="javascript" type="text/javascript" src="https://'.$dir.'/autotheme_diffrequesthandler.js" defer></script>';
     ?><style><?
     ?>h1   {color: blue;font-weight:bold;font-size:20px;}<?
     ?>p    {color: red;}<?
