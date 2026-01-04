@@ -2,7 +2,7 @@
 //License, v. 2.0. If a copy of the MPL was not distributed with this
 //file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
 
-class dontcode_diffrequesthandler
+class autotheme_diffrequesthandler
 {
   constructor()
   {
@@ -18,8 +18,8 @@ class dontcode_diffrequesthandler
     {
       //console.log('this.observer.request:'+url+'?tab_id='+tab_id.content);
       var url_request = url+'?tab_id='+tab_id.content;
-      url_request += '&_dontcode_rule_number='+rule_number;
-      url_request += '&_dontcode_rule_number_user_action='+rule_number_user_action;
+      url_request += '&_autotheme_rule_number='+rule_number;
+      url_request += '&_autotheme_rule_number_user_action='+rule_number_user_action;
       for(var value_key in values)
       {
         url_request += '&'+value_key+'='+values[value_key];
@@ -210,4 +210,4 @@ class fileloader
 
 }//const server = class
 
-diffrequesthandler = new dontcode_diffrequesthandler();
+diffrequesthandler = new autotheme_diffrequesthandler();
