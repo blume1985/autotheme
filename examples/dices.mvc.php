@@ -4,7 +4,7 @@
 
 <?
   $version = "29.125.test";
-  include_once($_SERVER['DOCUMENT_ROOT']."/lib_dontcode/dontcode_mvc_controller.php");
+  include_once($_SERVER['DOCUMENT_ROOT']."/lib_autotheme/autotheme_mvc_controller.php");
 
   //init
   $name                = "dices";
@@ -26,12 +26,12 @@
       $dices = array();
       for($dice_number=0;$dice_number<self::DICES_NUMBER;$dice_number++)
       {
-        if(isset($_SESSION['dontcode'][$dice_number]))
-          $dice = $_SESSION['dontcode'][$dice_number];
+        if(isset($_SESSION['autotheme'][$dice_number]))
+          $dice = $_SESSION['autotheme'][$dice_number];
         else
         {
           $dice = rand(self::DICE_MIN,self::DICE_MAX);
-          $_SESSION['dontcode'][$dice_number] = $dice;
+          $_SESSION['autotheme'][$dice_number] = $dice;
         }
         $dices[$dice_number]['dice_number']   = $dice_number;
         $dices[$dice_number]['dice_value']    = $dice;
@@ -49,7 +49,7 @@
 
     public function roll_single_dice($dice_number)
     {
-      $_SESSION['dontcode'][$dice_number] = rand(self::DICE_MIN,self::DICE_MAX);
+      $_SESSION['autotheme'][$dice_number] = rand(self::DICE_MIN,self::DICE_MAX);
       return true;
     }//public function
   }//class
@@ -112,7 +112,7 @@
   $controller_rules[2]['user-action'][1]['domdata2model']['dice_number']        = '@data_dice_number';
   $controller_rules[2]['user-action'][1]['model']                               = 'roll_single_dice';
   
-  $dices = new dontcode_mvc_controller($name,$model,$view_xhtml_template,$view_css,$controller_rules);
+  $dices = new autotheme_mvc_controller($name,$model,$view_xhtml_template,$view_css,$controller_rules);
 
   $dices->run();
 ?>
