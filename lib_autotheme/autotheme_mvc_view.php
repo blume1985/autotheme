@@ -4,11 +4,6 @@
 
 <?
 
-  //if(!isset($version))
-  //{
-    $version = "1.0.0.ready";
-  //}//if
-
   class dontcode_mvc_view 
   {
     private $name = null;
