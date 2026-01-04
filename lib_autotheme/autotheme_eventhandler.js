@@ -2,7 +2,7 @@
 //License, v. 2.0. If a copy of the MPL was not distributed with this
 //file, You can obtain one at https://mozilla.org/MPL/2.0/. -->
 
-class dontcode_log
+class autotheme_log
 {
   name = null;
 
@@ -18,9 +18,9 @@ class dontcode_log
   }
 }
 
-log = new dontcode_log('dontcode_eventhandler');
+log = new autotheme_log('autotheme_eventhandler');
 
-class dontcode_eventhandler
+class autotheme_eventhandler
 {
   rules = [];
   diffrequesthandler = null;
@@ -29,7 +29,7 @@ class dontcode_eventhandler
   {
     //DEMAND
     if(typeof diffrequesthandler != "object")                        return log.handle(false,'warn',new Error().lineNumber);
-    if(!(diffrequesthandler instanceof dontcode_diffrequesthandler)) return log.handle(false,'warn',new Error().lineNumber);
+    if(!(diffrequesthandler instanceof autotheme_diffrequesthandler)) return log.handle(false,'warn',new Error().lineNumber);
     if(typeof this.diffrequesthandler == "undefined")                return log.handle(false,'warn',new Error().lineNumber);
 
     //SOLVE
@@ -292,9 +292,9 @@ if(diffrequesthandler)
 {
   if(typeof diffrequesthandler == "object")
   {
-    if(diffrequesthandler instanceof dontcode_diffrequesthandler)
+    if(diffrequesthandler instanceof autotheme_diffrequesthandler)
     {
-      eventhandler = new dontcode_eventhandler(diffrequesthandler);
+      eventhandler = new autotheme_eventhandler(diffrequesthandler);
       for(number in rules)
       {
         console.log(number+':'+rules[number][0]+","+rules[number][1]+","+rules[number][2]+","+rules[number][3]+","+rules[number][4]);
