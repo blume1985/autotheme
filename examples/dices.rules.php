@@ -5,7 +5,7 @@
 <?
 
   $version = "26.1";
-  include_once($_SERVER['DOCUMENT_ROOT']."/lib_dontcode/dontcode_requesthandler.php");
+  include_once($_SERVER['DOCUMENT_ROOT']."/lib_autotheme/autotheme_requesthandler.php");
   if(empty(session_id)) session_start();
 
   class model
