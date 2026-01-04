@@ -6,10 +6,10 @@
 
   if(!isset($version)) $version = "1.0.0.ready";
 
-  include_once($_SERVER['DOCUMENT_ROOT']."/lib_dontcode/dontcode_pagecache.php");
-  include_once($_SERVER['DOCUMENT_ROOT']."/lib_dontcode/dontcode_xhtml_differ.php");
+  include_once($_SERVER['DOCUMENT_ROOT']."/lib_autotheme/autotheme_pagecache.php");
+  include_once($_SERVER['DOCUMENT_ROOT']."/lib_autotheme/autotheme_xhtml_differ.php");
 
-  class dontcode_requesthandler
+  class autotheme_requesthandler
   {
     const REQUEST_MODE_FULL = "full_request";
     const REQUEST_MODE_DIFF = "differential_request";
@@ -130,7 +130,7 @@
       if(!is_string($xhtml_doc)) return false;
 
       //SOLVE
-      $pagecache = new dontcode_pagecache();
+      $pagecache = new autotheme_pagecache();
       $has_handled_request = null;
       if($this->request_mode == self::REQUEST_MODE_FULL)
         $has_handled_request = $this->handle_request_full($xhtml_doc,$pagecache);
@@ -151,7 +151,7 @@
       if(!isset($xhtml_doc_active))                   return false;
       if(!isset($pagecache))                          return false;
       if(!is_string($xhtml_doc_active))               return false;
-      if(!($pagecache instanceof dontcode_pagecache)) return false;
+      if(!($pagecache instanceof autotheme_pagecache)) return false;
 
       //SOLVE
       $tab_id = $pagecache->catch_tab_id_by_write_page($xhtml_doc_active);
@@ -171,7 +171,7 @@
       if(!isset($xhtml_doc_sequent))                  return false;
       if(!isset($pagecache))                          return false;
       if(!is_string($xhtml_doc_sequent))              return false;
-      if(!($pagecache instanceof dontcode_pagecache)) return false;
+      if(!($pagecache instanceof autotheme_pagecache)) return false;
 
       //SOLVE
       $has_rewritten_page_sequent = null;
@@ -181,7 +181,7 @@
         $xhtml_doc_active = $pagecache->request_page();
         if(is_string($xhtml_doc_active))
         {
-          $xhtml_differ = new dontcode_xhtml_differ();
+          $xhtml_differ = new autotheme_xhtml_differ();
           //echo "catch_shiftxml_out_of_xhtml_documents@".__LINE__."<br/>";
           $has_rewritten_page_sequent = $pagecache->rewrite_page($xhtml_doc_sequent);
           $shiftxml = $xhtml_differ->catch_shiftxml_out_of_xhtml_documents($xhtml_doc_active,$xhtml_doc_sequent);
@@ -212,14 +212,14 @@
                   'full'=>4,
                   'diff'=>5];
 
-    $requesthandler = new dontcode_requesthandler(false);
+    $requesthandler = new autotheme_requesthandler(false);
 
     $testcase = null;
     if(isset($_REQUEST['testcase']))$testcase = $_REQUEST['testcase'];
     switch($testcase)
     {
       case $testcases['request']:
-        if($requesthandler instanceof dontcode_requesthandler)
+        if($requesthandler instanceof autotheme_requesthandler)
         {
           echo "requesthandler has been constructed<br/>";
         }
