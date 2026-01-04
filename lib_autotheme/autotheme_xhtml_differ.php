@@ -6,7 +6,7 @@
  
   if(!isset($version)) $version = "1.0.0.ready";
 
-  class dontcode_xhtml_differ
+  class autotheme_xhtml_differ
   {
 
     function catch_shiftxml_out_of_xhtml_documents($xhtml_doc_active,$xhtml_doc_sequent)
@@ -25,7 +25,7 @@
          &&($simplexml_doc_sequent != false))
       {
         $shiftxml = '<?xml version="1.0"?>';
-        $shiftxml.= '<shiftxml:diffoperations xmlns:shiftxml="namespace://dontcode.de/ns/shiftxml" xmlns:replace="namespace://dontcode.de/ns/replace" xmlns:remove="namespace://dontcode.de/ns/remove" xmlns:insert="namespace://dontcode.de/ns/insert">';
+        $shiftxml.= '<shiftxml:diffoperations xmlns:shiftxml="namespace://autotheme.de/ns/shiftxml" xmlns:replace="namespace://autotheme.de/ns/replace" xmlns:remove="namespace://autotheme.de/ns/remove" xmlns:insert="namespace://autotheme.de/ns/insert">';
         if(   strtolower($simplexml_doc_active->getName())   
           == strtolower($simplexml_doc_sequent->getName()))
         {
@@ -519,15 +519,15 @@
     //if(array_key_exists($testcase,$testcases)) $testcase = $testcases[$testcase];
     if(isset($_REQUEST['output']))$output = $_REQUEST['output'];
 
-    $xhtml_differ = new dontcode_xhtml_differ();
+    $xhtml_differ = new autotheme_xhtml_differ();
     switch($testcase)
     {
       case $testcases['document1']:
         $xhtml_doc1 = '<html>';
         $xhtml_doc1.= '<head>';
         $xhtml_doc1.= '<title>version '.$version.'</title>';
-        $xhtml_doc1.= '<script language="javascript" type="text/javascript" src="https://'.$dir.'/dontcode_diffrequesthandler.js" defer></script>';
-        $xhtml_doc1.= '<script language="javascript" type="text/javascript" src="https://'.$dir.'/dontcode_eventhandler.js" defer></script>';
+        $xhtml_doc1.= '<script language="javascript" type="text/javascript" src="https://'.$dir.'/autotheme_diffrequesthandler.js" defer></script>';
+        $xhtml_doc1.= '<script language="javascript" type="text/javascript" src="https://'.$dir.'/autotheme_eventhandler.js" defer></script>';
         $xhtml_doc1.= '<style>';
         $xhtml_doc1.= 'h1   {color: blue;font-weight:bold;font-size:20px;}';
         $xhtml_doc1.= 'p    {color: red;}';
@@ -546,8 +546,8 @@
         $xhtml_doc2 = '<html>';
         $xhtml_doc2.= '<head>';
         $xhtml_doc2.= '<title>version '.$version.'</title>';
-        $xhtml_doc2.= '<script language="javascript" type="text/javascript" src="https://'.$dir.'/dontcode_diffrequesthandler.js" defer></script>';
-        $xhtml_doc2.= '<script language="javascript" type="text/javascript" src="https://'.$dir.'/dontcode_eventhandler.js" defer></script>';
+        $xhtml_doc2.= '<script language="javascript" type="text/javascript" src="https://'.$dir.'/autotheme_diffrequesthandler.js" defer></script>';
+        $xhtml_doc2.= '<script language="javascript" type="text/javascript" src="https://'.$dir.'/autotheme_eventhandler.js" defer></script>';
         $xhtml_doc2.= '<style>';
         $xhtml_doc2.= 'h1   {color: blue;font-weight:bold;font-size:20px;}';
         $xhtml_doc2.= 'p    {color: red;}';
@@ -651,7 +651,7 @@
         $xhtml_doc_active.= 'This is a';
         $xhtml_doc_active.= '<b>very important</b>';
         $xhtml_doc_active.= ' sentence which leads to this';
-        $xhtml_doc_active.= '<a src="dontcode.de">link</a>';
+        $xhtml_doc_active.= '<a src="autotheme.de">link</a>';
         $xhtml_doc_active.= '</body>';
         $xhtml_doc_active.= '</html>';
 
@@ -680,14 +680,14 @@
         $xhtml_doc_active.= '<head>';
         $xhtml_doc_active.= '<title>Roll the dices!</title>';
         $xhtml_doc_active.= '<meta name="tab-id" content="1"/>';
-        $xhtml_doc_active.= '<script type="text/javascript" src="https://fix.dontcode.de/lib_dontcode/dontcode_diffrequesthandler.js" defer=""> </script>';
-        $xhtml_doc_active.= '<script type="text/javascript" src="https://fix.dontcode.de/lib_dontcode/dontcode_eventhandler.js" defer=""> </script>';
+        $xhtml_doc_active.= '<script type="text/javascript" src="https://fix.autotheme.de/lib_autotheme/autotheme_diffrequesthandler.js" defer=""> </script>';
+        $xhtml_doc_active.= '<script type="text/javascript" src="https://fix.autotheme.de/lib_autotheme/autotheme_eventhandler.js" defer=""> </script>';
         $xhtml_doc_active.= '</head>';
         $xhtml_doc_active.= '<body>';
         $xhtml_doc_active.= '<header>';
         $xhtml_doc_active.= '<marquee>Roll the dices!</marquee>';
         $xhtml_doc_active.= '</header>';
-        $xhtml_doc_active.= '<input type="button" value="Roll now!" onclick="include_shiftxml.register(\'https:/\'+\'/fix.dontcode.de/stuff/dices.php?tab_id=1\');"/>';
+        $xhtml_doc_active.= '<input type="button" value="Roll now!" onclick="include_shiftxml.register(\'https:/\'+\'/fix.autotheme.de/stuff/dices.php?tab_id=1\');"/>';
         $xhtml_doc_active.= '<div></div>';
         $xhtml_doc_active.= '<div></div>';
         $xhtml_doc_active.= '<div></div>';
@@ -705,14 +705,14 @@
         $xhtml_doc_sequent.= '<head>';
         $xhtml_doc_sequent.= '<title>Roll the dices!</title>';
         $xhtml_doc_sequent.= '<meta name="tab-id" content="1"/>';
-        $xhtml_doc_sequent.= '<script type="text/javascript" src="https://fix.dontcode.de/lib_dontcode/dontcode_diffrequesthandler.js" defer=""> </script>';
-        $xhtml_doc_sequent.= '<script type="text/javascript" src="https://fix.dontcode.de/lib_dontcode/dontcode_eventhandler.js" defer=""> </script>';
+        $xhtml_doc_sequent.= '<script type="text/javascript" src="https://fix.autotheme.de/lib_autotheme/autotheme_diffrequesthandler.js" defer=""> </script>';
+        $xhtml_doc_sequent.= '<script type="text/javascript" src="https://fix.autotheme.de/lib_autotheme/autotheme_eventhandler.js" defer=""> </script>';
         $xhtml_doc_sequent.= '</head>';
         $xhtml_doc_sequent.= '<body>';
         $xhtml_doc_sequent.= '<header>';
         $xhtml_doc_sequent.= '<marquee>Roll the dices!</marquee>';
         $xhtml_doc_sequent.= '</header>';
-        $xhtml_doc_sequent.= '<input type="button" value="Roll now!" onclick="include_shiftxml.register(\'https:/\'+\'/fix.dontcode.de/stuff/dices.php?tab_id=1\');"/>';
+        $xhtml_doc_sequent.= '<input type="button" value="Roll now!" onclick="include_shiftxml.register(\'https:/\'+\'/fix.autotheme.de/stuff/dices.php?tab_id=1\');"/>';
         $xhtml_doc_sequent.= '<div></div>';
         $xhtml_doc_sequent.= '<div></div>';
         $xhtml_doc_sequent.= '<div></div>';
@@ -731,9 +731,9 @@
         /*$xhtml_doc_active = '<?xml version="1.0"?>';*/
         $xhtml_doc_active = '<html>';
         $xhtml_doc_active.= '<head>';
-        $xhtml_doc_active.= '<script type="text/javascript" src="https://fix.dontcode.de/lib_dontcode/dontcode_includer.js" defer=""> </script>';
-        $xhtml_doc_active.= '<script type="text/javascript" src="https://fix.dontcode.de/lib_dontcode/dontcode_eventhandler.js" defer=""> </script>';
-        $xhtml_doc_active.= '<script type="text/javascript" src="https://fix.dontcode.de/lib_dontcode/dontcode_doesntexist.js" defer=""> </script>';
+        $xhtml_doc_active.= '<script type="text/javascript" src="https://fix.autotheme.de/lib_autotheme/autotheme_includer.js" defer=""> </script>';
+        $xhtml_doc_active.= '<script type="text/javascript" src="https://fix.autotheme.de/lib_autotheme/autotheme_eventhandler.js" defer=""> </script>';
+        $xhtml_doc_active.= '<script type="text/javascript" src="https://fix.autotheme.de/lib_autotheme/autotheme_doesntexist.js" defer=""> </script>';
         $xhtml_doc_active.= '</head>';
         $xhtml_doc_active.= '<body>';
         $xhtml_doc_active.= '</body></html>';
@@ -741,9 +741,9 @@
         /*$xhtml_doc_sequent = '<?xml version="1.0"?>';*/
         $xhtml_doc_sequent = '<html>';
         $xhtml_doc_sequent.= '<head>';
-        $xhtml_doc_sequent.= '<script type="text/javascript" src="https://fix.dontcode.de/lib_dontcode/dontcode_includer.js" defer=""> </script>';
-        $xhtml_doc_sequent.= '<script type="text/javascript" src="https://fix.dontcode.de/lib_dontcode/dontcode_eventhandler.js" defer=""> </script>';
-        $xhtml_doc_sequent.= '<script type="text/javascript" src="https://fix.dontcode.de/lib_dontcode/dontcode_doesntexist.js" defer=""> </script>';
+        $xhtml_doc_sequent.= '<script type="text/javascript" src="https://fix.autotheme.de/lib_autotheme/autotheme_includer.js" defer=""> </script>';
+        $xhtml_doc_sequent.= '<script type="text/javascript" src="https://fix.autotheme.de/lib_autotheme/autotheme_eventhandler.js" defer=""> </script>';
+        $xhtml_doc_sequent.= '<script type="text/javascript" src="https://fix.autotheme.de/lib_autotheme/autotheme_doesntexist.js" defer=""> </script>';
         $xhtml_doc_sequent.= '</head>';
         $xhtml_doc_sequent.= '<body>';
         $xhtml_doc_sequent.= '</body></html>';
