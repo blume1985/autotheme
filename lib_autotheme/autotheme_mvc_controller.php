@@ -4,18 +4,12 @@
 
 <?
 
-  //if(!isset($version))
-  //{
-    $version = "1.0.0.ready";
-  //}//if
-  //echo $version;
-
-  include_once($_SERVER['DOCUMENT_ROOT']."/lib_dontcode/dontcode_requesthandler.php");
-  include_once($_SERVER['DOCUMENT_ROOT']."/lib_dontcode/dontcode_mvc_model.php");
-  include_once($_SERVER['DOCUMENT_ROOT']."/lib_dontcode/dontcode_mvc_view.php");
+  include_once($_SERVER['DOCUMENT_ROOT']."/lib_autotheme/autotheme_requesthandler.php");
+  include_once($_SERVER['DOCUMENT_ROOT']."/lib_autotheme/autotheme_mvc_model.php");
+  include_once($_SERVER['DOCUMENT_ROOT']."/lib_autotheme/autotheme_mvc_view.php");
   if(empty(session_id())) session_start();
 
-  class dontcode_mvc_controller 
+  class autotheme_mvc_controller 
   {
     private $name  = null;
 
@@ -34,24 +28,24 @@
       //SOLVE
       $this->name  = $name;
 
-      $this->requesthandler = new dontcode_requesthandler(false);
+      $this->requesthandler = new autotheme_requesthandler(false);
       if($this->check_rules_if_they_are_formally_valid($controller_rules) === true)
       {
         $this->controller_rules = $controller_rules;
       }
 
-      $this->model = new dontcode_mvc_model($name,$model);
-      $this->view  = new dontcode_mvc_view($name,$view_xhtml_template);
+      $this->model = new autotheme_mvc_model($name,$model);
+      $this->view  = new autotheme_mvc_view($name,$view_xhtml_template);
 
       $has_deposit_css = $this->deposit_css($view_css);
       $has_deposit_rules_user_action = $this->deposit_rules_user_action();
 
       //EVALUATE
-      if(!($this->requesthandler instanceof dontcode_requesthandler)) die("no contract@".__FILE__.'@'.__LINE__);
+      if(!($this->requesthandler instanceof autotheme_requesthandler)) die("no contract@".__FILE__.'@'.__LINE__);
       if(!is_string($this->name))                                     die("no contract@".__FILE__.'@'.__LINE__);
       if($this->controller_rules === null)                            die("no contract@".__FILE__.'@'.__LINE__);
-      if(!($this->model instanceof dontcode_mvc_model))               die("no contract@".__FILE__.'@'.__LINE__);
-      if(!($this->view instanceof dontcode_mvc_view))                 die("no contract@".__FILE__.'@'.__LINE__);
+      if(!($this->model instanceof autotheme_mvc_model))               die("no contract@".__FILE__.'@'.__LINE__);
+      if(!($this->view instanceof autotheme_mvc_view))                 die("no contract@".__FILE__.'@'.__LINE__);
       if(empty($has_deposit_css))                                     die("no contract@".__FILE__.'@'.__LINE__);
       if(empty($has_deposit_rules_user_action))                       die("no contract@".__FILE__.'@'.__LINE__);
     }//function
@@ -65,7 +59,7 @@
       $has_deposit_css = null;
       try 
       {
-        $_SESSION['dontcode'][$this->name]['css'] = $view_css;
+        $_SESSION['autotheme'][$this->name]['css'] = $view_css;
         $has_deposit_css = true;
       }//try 
       catch (\Throwable $th) 
@@ -280,10 +274,10 @@
     public function apply_rules_user_action()
     {
       //DEMAND
-      if(!($this->requesthandler instanceof dontcode_requesthandler)) return false;
+      if(!($this->requesthandler instanceof autotheme_requesthandler)) return false;
       if($this->controller_rules === null)                            return true;
-      if(!($this->model instanceof dontcode_mvc_model))               return false;
-      if(!($this->view instanceof dontcode_mvc_view))                 return false;
+      if(!($this->model instanceof autotheme_mvc_model))               return false;
+      if(!($this->view instanceof autotheme_mvc_view))                 return false;
 
       //SOLVE
       $has_applied_rules = null;
@@ -334,10 +328,10 @@
     public function apply_rules_request()
     {
       //DEMAND
-      if(!($this->requesthandler instanceof dontcode_requesthandler)) return false;
+      if(!($this->requesthandler instanceof autotheme_requesthandler)) return false;
       if($this->controller_rules === null)                            return true;
-      if(!($this->model instanceof dontcode_mvc_model))               return false;
-      if(!($this->view instanceof dontcode_mvc_view))                 return false;
+      if(!($this->model instanceof autotheme_mvc_model))               return false;
+      if(!($this->view instanceof autotheme_mvc_view))                 return false;
 
       //SOLVE
       $has_applied_rules = null;
@@ -381,7 +375,7 @@
     public function run()
     {
       //DEMAND
-      if(!($this->requesthandler instanceof dontcode_requesthandler)) return false;
+      if(!($this->requesthandler instanceof autotheme_requesthandler)) return false;
 
       //SOLVE
       $has_run = null;
@@ -418,7 +412,7 @@
     public function show_view()
     {
       //DEMAND
-      if(!($this->view instanceof dontcode_mvc_view))                 return false;
+      if(!($this->view instanceof autotheme_mvc_view))                 return false;
       
       //SOLVE
       $has_shown = $this->view->show();
@@ -434,7 +428,7 @@
     public function get_view()
     {
       //DEMAND
-      if(!($this->view instanceof dontcode_mvc_view))                 return false;
+      if(!($this->view instanceof autotheme_mvc_view))                 return false;
       
       //SOLVE
       $view = $this->view->get();
@@ -484,12 +478,12 @@
         $dices = array();
         for($dice_number=0;$dice_number<self::DICES_NUMBER;$dice_number++)
         {
-          if(isset($_SESSION['dontcode'][$dice_number]))
-            $dice = $_SESSION['dontcode'][$dice_number];
+          if(isset($_SESSION['autotheme'][$dice_number]))
+            $dice = $_SESSION['autotheme'][$dice_number];
           else
           {
             $dice = rand(self::DICE_MIN,self::DICE_MAX);
-            $_SESSION['dontcode'][$dice_number] = $dice;
+            $_SESSION['autotheme'][$dice_number] = $dice;
           }
           $dices[$dice_number]['dice_number']   = $dice_number;
           $dices[$dice_number]['dice_value']    = $dice;
@@ -507,7 +501,7 @@
 
       public function roll_single_dice($dice_number)
       {
-        $_SESSION['dontcode'][$dice_number] = rand(self::DICE_MIN,self::DICE_MAX);
+        $_SESSION['autotheme'][$dice_number] = rand(self::DICE_MIN,self::DICE_MAX);
         return true;
       }//public function
     }//class
@@ -524,7 +518,7 @@
         $controller_rules[2]['user-action'][1]['model']                        = 'roll_single_dice';
 
         //($name,$model,$view_xhtml_template,$view_css,$controller_rules)
-        $controller = new dontcode_mvc_controller("unittest",null,"<html/>",null,$controller_rules);
+        $controller = new autotheme_mvc_controller("unittest",null,"<html/>",null,$controller_rules);
         $rules_are_formally_valid = $controller->check_if_rules_are_formally_valid();
 
         echo "Controller-Regeln:<br/>";
@@ -548,7 +542,7 @@
         $controller_rules[2]['user-action'][1]['model']                        = 'roll_single_dice';
 
         //($name,$model,$view_xhtml_template,$view_css,$controller_rules)
-        $controller = new dontcode_mvc_controller("unittest",null,"<html/>",null,$controller_rules);
+        $controller = new autotheme_mvc_controller("unittest",null,"<html/>",null,$controller_rules);
         $rules_are_formally_valid = $controller->check_if_rules_are_formally_valid();
 
         echo "Controller-Regeln:<br/>";
@@ -572,7 +566,7 @@
         //right: $controller_rules[2]['user-action'][1]['model']                        = 'roll_single_dice';
 
         //($name,$model,$view_xhtml_template,$view_css,$controller_rules)
-        $controller = new dontcode_mvc_controller("unittest",null,"<html/>",null,$controller_rules);
+        $controller = new autotheme_mvc_controller("unittest",null,"<html/>",null,$controller_rules);
         $rules_are_formally_valid = $controller->check_if_rules_are_formally_valid();
 
         echo "Controller-Regeln:<br/>";
@@ -597,7 +591,7 @@
         $controller_rules[2]['user-action'][1]['model']                        = 'roll_single_dice';
 
         //($name,$model,$view_xhtml_template,$view_css,$controller_rules)
-        $controller = new dontcode_mvc_controller("unittest",null,"<html/>",null,$controller_rules);
+        $controller = new autotheme_mvc_controller("unittest",null,"<html/>",null,$controller_rules);
         $rules_are_formally_valid = $controller->check_if_rules_are_formally_valid();
 
         echo "Controller-Regeln:<br/>";
@@ -621,7 +615,7 @@
         $controller_rules[2]['user-action'][1]['model']                        = 'roll_single_dice';
 
         //($name,$model,$view_xhtml_template,$view_css,$controller_rules)
-        $controller = new dontcode_mvc_controller("unittest",null,"<html/>",null,$controller_rules);
+        $controller = new autotheme_mvc_controller("unittest",null,"<html/>",null,$controller_rules);
         $rules_are_formally_valid = $controller->check_if_rules_are_formally_valid();
 
         echo "Controller-Regeln:<br/>";
@@ -644,7 +638,7 @@
         $controller_rules[1]['user-action'][1]['model']           = 'roll_all_dices';
 
         //($name,$model,$view_xhtml_template,$view_css,$controller_rules)
-        $controller = new dontcode_mvc_controller("unittest",null,"<html/>",null,$controller_rules);
+        $controller = new autotheme_mvc_controller("unittest",null,"<html/>",null,$controller_rules);
         $rules_are_formally_valid = $controller->check_if_rules_are_formally_valid();
 
         echo "Controller-Regeln:<br/>";
@@ -667,7 +661,7 @@
         $controller_rules[1]['user-action'][1]['model']           = 'roll_all_dices';
 
         //($name,$model,$view_xhtml_template,$view_css,$controller_rules)
-        $controller = new dontcode_mvc_controller("unittest",null,"<html/>",null,$controller_rules);
+        $controller = new autotheme_mvc_controller("unittest",null,"<html/>",null,$controller_rules);
         $rules_are_formally_valid = $controller->check_if_rules_are_formally_valid();
 
         echo "Controller-Regeln:<br/>";
