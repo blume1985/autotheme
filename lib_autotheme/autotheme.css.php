@@ -6,7 +6,7 @@
   $version = "1.0.0.ready";
   if(empty(session_id())) session_start();
 
-  class dontcode_css
+  class autotheme_css
   {
     private $name = null;
     private $css = "";
@@ -37,12 +37,12 @@
     public function load_css_from_session_variable()
     {
       //DEMAND
-      if(!isset($_REQUEST['_dontcode_name']))                               return false;
-      if(!isset($_SESSION['dontcode'][$_REQUEST['_dontcode_name']]))        return false;
-      if(!isset($_SESSION['dontcode'][$_REQUEST['_dontcode_name']]['css'])) return false;
+      if(!isset($_REQUEST['_autotheme_name']))                               return false;
+      if(!isset($_SESSION['autotheme'][$_REQUEST['_autotheme_name']]))        return false;
+      if(!isset($_SESSION['autotheme'][$_REQUEST['_autotheme_name']]['css'])) return false;
 
       //SOLVE
-      $this->css = $_SESSION['dontcode'][$_REQUEST['_dontcode_name']]['css'];
+      $this->css = $_SESSION['autotheme'][$_REQUEST['_autotheme_name']]['css'];
 
       //EVALUATE
       if(!isset($this->css))     return false;
@@ -121,5 +121,5 @@
       return false;
     }
   }
-  $css = new dontcode_css();
+  $css = new autotheme_css();
 ?>
