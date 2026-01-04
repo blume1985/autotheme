@@ -6,12 +6,12 @@
  
   if(!isset($version)) $version = "1.0.0.ready";
   
-  class dontcode_pagecache
+  class autotheme_pagecache
   {
     const UNITTEST_MYSQL_HOST = 'localhost';
-    const UNITTEST_MYSQL_USER = 'dontcode_de_fix';
+    const UNITTEST_MYSQL_USER = 'autotheme_de_fix';
     const UNITTEST_MYSQL_PASS = 'v?u1rp&sDJzOOo!N';
-    const UNITTEST_MYSQL_BANK = 'dontcode_de_fix';
+    const UNITTEST_MYSQL_BANK = 'autotheme_de_fix';
 
     private $dir_cache = "./_cache/";
     private $mysqli_connection = null;
@@ -87,7 +87,7 @@
 
       //SOLVE
       $result_create_table = null;
-      $sql = "CREATE TABLE IF NOT EXISTS `dontcode_de_fix`.`_dontcode_cache_pages` \n";
+      $sql = "CREATE TABLE IF NOT EXISTS `autotheme_de_fix`.`_autotheme_cache_pages` \n";
       $sql.= "(`id` INT(64) NOT NULL AUTO_INCREMENT , \n";
       $sql.= " `session_id` TEXT NOT NULL , \n";
       $sql.= " `tab_id` INT(8) NOT NULL , \n";
@@ -120,7 +120,7 @@
 
       $result_request = false;
       $sql = "SELECT `xhtml_document` ";
-      $sql.= "FROM `_dontcode_cache_pages` ";
+      $sql.= "FROM `_autotheme_cache_pages` ";
       $sql.= "WHERE `session_id`='".$session_id."' AND `tab_id`='".$tab_id."';";
       $result_request = $this->mysqli_connection->query($sql);
 
@@ -183,7 +183,7 @@
           $domAttribute1 = $xhtml_dom->createAttribute('type');
           $domAttribute1->value = 'text/javascript';
           $domAttribute2 = $xhtml_dom->createAttribute('src');
-          $domAttribute2->value = "https://".$_SERVER['HTTP_HOST']."/lib_dontcode/dontcode_diffrequesthandler.js";
+          $domAttribute2->value = "https://".$_SERVER['HTTP_HOST']."/lib_autotheme/autotheme_diffrequesthandler.js";
           $domAttribute3 = $xhtml_dom->createAttribute('defer');
           $domElement_child->appendChild($domAttribute1);
           $domElement_child->appendChild($domAttribute2);
@@ -195,7 +195,7 @@
           $domAttribute1 = $xhtml_dom->createAttribute('type');
           $domAttribute1->value = 'text/javascript';
           $domAttribute2 = $xhtml_dom->createAttribute('src');
-          $domAttribute2->value = "https://".$_SERVER['HTTP_HOST']."/lib_dontcode/dontcode_eventhandler.js";
+          $domAttribute2->value = "https://".$_SERVER['HTTP_HOST']."/lib_autotheme/autotheme_eventhandler.js";
           $domAttribute3 = $xhtml_dom->createAttribute('defer');
           $domElement_child->appendChild($domAttribute1);
           $domElement_child->appendChild($domAttribute2);
@@ -230,7 +230,7 @@
       //SOLVE
       $result_tab_id_max = null;
       $sql = "SELECT max(`tab_id`) as tab_id_max ";
-      $sql.= "FROM `_dontcode_cache_pages` ";
+      $sql.= "FROM `_autotheme_cache_pages` ";
       $sql.= "WHERE `session_id` = '$session_id'";
       $result_tab_id_max = $this->mysqli_connection->query($sql);
 
@@ -247,11 +247,11 @@
 
         $this->update_tab_id_on_xhtml_document($xhtml_document,$tab_id);
         
-        $sql = "DELETE FROM `_dontcode_cache_pages` ";
+        $sql = "DELETE FROM `_autotheme_cache_pages` ";
         $sql.= "WHERE `session_id`='".$session_id."' AND `tab_id`='".$tab_id."';";
         $result_delete_cache_page = $this->mysqli_connection->query($sql);
 
-        $sql = "INSERT INTO `_dontcode_cache_pages` ";
+        $sql = "INSERT INTO `_autotheme_cache_pages` ";
         $sql.= "(`id`,`session_id`,`tab_id`,`xhtml_document`,`lastchange`) ";
         $sql.= "VALUES ";
         $sql.= "(null,'".$session_id."','".$tab_id."','".$this->mysqli_connection->real_escape_string($xhtml_document)."',now());";
@@ -289,7 +289,7 @@
       $this->update_tab_id_on_xhtml_document($xhtml_document,$tab_id);
         
       $result_update = null;
-      $sql = "UPDATE `_dontcode_cache_pages` ";
+      $sql = "UPDATE `_autotheme_cache_pages` ";
       $sql.= "SET `xhtml_document`='".$this->mysqli_connection->real_escape_string($xhtml_document)."', `lastchange`=now() ";
       $sql.= "WHERE `session_id`='".$session_id."' AND `tab_id`='".$tab_id."';";
       
@@ -327,7 +327,7 @@
       //echo (file_exists(session_save_path().'/sess_'.session_id()) ? 1 : 0);
       $result_session_ids = null;
       $sql = "SELECT `session_id` ";
-      $sql.= "FROM `_dontcode_cache_pages` ";
+      $sql.= "FROM `_autotheme_cache_pages` ";
       $sql.= "GROUP BY `session_id`;";
       $result_session_ids = $this->mysqli_connection->query($sql);
 
@@ -337,7 +337,7 @@
         $session_id = $result_session_id['session_id'];
         if(!file_exists(session_save_path().'/sess_'.$session_id))
         {
-          $sql = "DELETE FROM `_dontcode_cache_pages` ";
+          $sql = "DELETE FROM `_autotheme_cache_pages` ";
           $sql.= "WHERE `session_id`='".$session_id."';";
           $result_delete_cache_page = $this->mysqli_connection->query($sql);
           if(!$result_delete_cache_page)
@@ -379,7 +379,7 @@
                   'cleancache'=>5,
                   'coding'=>6];
 
-    $pagecache = new dontcode_pagecache();
+    $pagecache = new autotheme_pagecache();
 
     $testcase = null;
     if(isset($_REQUEST['testcase']))$testcase = $_REQUEST['testcase'];
@@ -389,8 +389,8 @@
         $xhtml_doc1 = '<html>';
         $xhtml_doc1.= '<head>';
         $xhtml_doc1.= '<title>version '.$version.'</title>';
-        $xhtml_doc1.= '<script language="javascript" type="text/javascript" src="https://'.$dir.'/dontcode_includer_serverfile.js" defer></script>';
-        $xhtml_doc1.= '<script language="javascript" type="text/javascript" src="https://'.$dir.'/dontcode_includer_shiftxml.js" defer></script>';
+        $xhtml_doc1.= '<script language="javascript" type="text/javascript" src="https://'.$dir.'/autotheme_includer_serverfile.js" defer></script>';
+        $xhtml_doc1.= '<script language="javascript" type="text/javascript" src="https://'.$dir.'/autotheme_includer_shiftxml.js" defer></script>';
         $xhtml_doc1.= '<style>';
         $xhtml_doc1.= 'h1   {color: blue;font-weight:bold;font-size:20px;}';
         $xhtml_doc1.= 'p    {color: red;}';
@@ -414,8 +414,8 @@
         $xhtml_doc1 = '<html>';
         $xhtml_doc1.= '<head>';
         $xhtml_doc1.= '<title>version '.$version.'</title>';
-        $xhtml_doc1.= '<script language="javascript" type="text/javascript" src="https://'.$dir.'/dontcode_includer_serverfile.js" defer></script>';
-        $xhtml_doc1.= '<script language="javascript" type="text/javascript" src="https://'.$dir.'/dontcode_includer_shiftxml.js" defer></script>';
+        $xhtml_doc1.= '<script language="javascript" type="text/javascript" src="https://'.$dir.'/autotheme_includer_serverfile.js" defer></script>';
+        $xhtml_doc1.= '<script language="javascript" type="text/javascript" src="https://'.$dir.'/autotheme_includer_shiftxml.js" defer></script>';
         $xhtml_doc1.= '<style>';
         $xhtml_doc1.= 'h1   {color: blue;font-weight:bold;font-size:20px;}';
         $xhtml_doc1.= 'p    {color: red;}';
@@ -457,8 +457,8 @@
         $xhtml_doc2 = '<html>';
         $xhtml_doc2.= '<head>';
         $xhtml_doc2.= '<title>version '.$version.'</title>';
-        $xhtml_doc2.= '<script language="javascript" type="text/javascript" src="https://'.$dir.'/dontcode_includer_serverfile.js" defer></script>';
-        $xhtml_doc2.= '<script language="javascript" type="text/javascript" src="https://'.$dir.'/dontcode_includer_shiftxml.js" defer></script>';
+        $xhtml_doc2.= '<script language="javascript" type="text/javascript" src="https://'.$dir.'/autotheme_includer_serverfile.js" defer></script>';
+        $xhtml_doc2.= '<script language="javascript" type="text/javascript" src="https://'.$dir.'/autotheme_includer_shiftxml.js" defer></script>';
         $xhtml_doc2.= '<style>';
         $xhtml_doc2.= 'h1   {color: blue;font-weight:bold;font-size:20px;}';
         $xhtml_doc2.= 'p    {color: red;}';
