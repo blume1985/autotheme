@@ -10,10 +10,10 @@
   }//if
   if(empty(session_id())) session_start();
 
-  class dontcode_mvc_model
+  class autotheme_mvc_model
   {
-    const RULE_NUMBER             = '_dontcode_rule_number';
-    const RULE_NUMBER_USER_ACTION = '_dontcode_rule_number_user_action';
+    const RULE_NUMBER             = '_autotheme_rule_number';
+    const RULE_NUMBER_USER_ACTION = '_autotheme_rule_number_user_action';
 
     private $name  = null;
     private $model = null;
@@ -41,7 +41,7 @@
       if(!isset($_REQUEST[self::RULE_NUMBER])) return false;
 
       //SOLVE
-      $rule_number = (int)$_REQUEST[self::RULE_NUMBER]; //in url set ?_dontcode_rulenumber=
+      $rule_number = (int)$_REQUEST[self::RULE_NUMBER]; //in url set ?_autotheme_rulenumber=
 
       //EVALUATE
       if($rule_number === null) return false;
@@ -56,7 +56,7 @@
       if(!isset($_REQUEST[self::RULE_NUMBER_USER_ACTION])) return false;
 
       //SOLVE
-      $rule_number = (int)$_REQUEST[self::RULE_NUMBER_USER_ACTION]; //in url set ?_dontcode_rulenumber=
+      $rule_number = (int)$_REQUEST[self::RULE_NUMBER_USER_ACTION]; //in url set ?_autotheme_rulenumber=
 
       //EVALUATE
       if($rule_number === null) return false;
@@ -192,7 +192,7 @@
       $testcase = $_REQUEST['testcase'];
     }//else
 
-    echo "test: dontcode_mvc_model.php<br/>";
+    echo "test: autotheme_mvc_model.php<br/>";
 
     class dice
     {
@@ -207,14 +207,14 @@
         $dices = array();
         for($dice_number=0;$dice_number<self::DICES_NUMBER;$dice_number++)
         {
-          if(isset($_SESSION['dontcode'][$dice_number]))
+          if(isset($_SESSION['autotheme'][$dice_number]))
           {
-            $dice = $_SESSION['dontcode'][$dice_number];
+            $dice = $_SESSION['autotheme'][$dice_number];
           }//if
           else
           {
             $dice = rand(self::DICE_MIN,self::DICE_MAX);
-            $_SESSION['dontcode'][$dice_number] = $dice;
+            $_SESSION['autotheme'][$dice_number] = $dice;
           }//else
           $dices[$dice_number]['dice_number']   = $dice_number;
           $dices[$dice_number]['dice_value']    = $dice;
@@ -232,7 +232,7 @@
 
       public function roll_single_dice($dice_number)
       {
-        $_SESSION['dontcode'][$dice_number] = rand(self::DICE_MIN,self::DICE_MAX);
+        $_SESSION['autotheme'][$dice_number] = rand(self::DICE_MIN,self::DICE_MAX);
         return true;
       }//public function
     }//class
@@ -240,7 +240,7 @@
     switch($testcase)
     {
       case $testcases['array']:
-        $actual_link = 'http://'.$_SERVER['HTTP_HOST']."/lib_dontcode/dontcode_mvc_model.php?testcase=array&brett[1][2]=kreis&brett[5][4]=quadrat";
+        $actual_link = 'http://'.$_SERVER['HTTP_HOST']."/lib_autotheme/autotheme_mvc_model.php?testcase=array&brett[1][2]=kreis&brett[5][4]=quadrat";
         echo "<a href=".$actual_link.">".$actual_link."</a><br/>";
         echo "<pre>";
         print_r($_REQUEST);
@@ -248,12 +248,12 @@
         break;
       case $testcases['existingfunction']:
         echo "function: get_dices<br/>";
-        $model = new dontcode_mvc_model("dice",new dice());
+        $model = new autotheme_mvc_model("dice",new dice());
         $data = $model->get_data_by_function('get_dices');
         print_r($data);
         break;
       case $testcases['nonexistingfunction']:
-        $model = new dontcode_mvc_model("dice",new dice());
+        $model = new autotheme_mvc_model("dice",new dice());
         $data = $model->get_data_by_function('get_dices2');
         echo "Erwartung: Funktion soll nicht liefern, da es get_dices2 nicht gibt<br/>";
         if(!empty($data))
@@ -265,7 +265,7 @@
         }
         break;
       case $testcases['setfunction']:
-        $model = new dontcode_mvc_model("dice",new dice());
+        $model = new autotheme_mvc_model("dice",new dice());
         $set_data = $model->set_data_by_function('roll_single_dice',array('dice_number'));
         if($set_data == true)
         {
@@ -276,7 +276,7 @@
         }
         break;
       case $testcases['rollalldices']:
-        $model = new dontcode_mvc_model("dice",new dice());
+        $model = new autotheme_mvc_model("dice",new dice());
         $set_data = $model->set_data_by_function('roll_all_dices',array());
         if($set_data == true)
         {
