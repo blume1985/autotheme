@@ -6,8 +6,8 @@
 
   $version = "25.44";
 
-  include_once($_SERVER['DOCUMENT_ROOT']."/lib_dontcode/dontcode_requesthandler.php");
-  $dontcode_requesthandler = new dontcode_requesthandler(true);
+  include_once($_SERVER['DOCUMENT_ROOT']."/lib_autotheme/autotheme_requesthandler.php");
+  $autotheme_requesthandler = new autotheme_requesthandler(true);
 
   ?><html><?
     ?><head><?
@@ -74,6 +74,6 @@
     ?></body><?
   ?></html><?
 
-  $dontcode_requesthandler->stop_request();
+  $autotheme_requesthandler->stop_request();
 
 ?>
