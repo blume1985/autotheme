@@ -21,7 +21,7 @@ class shiftxml_document
  
     $this->document = new DOMDocument('1.0');
 
-    $xml = '<shiftxml:diffoperations xmlns:shiftxml="namespace://dontcode.de/ns/shiftxml"/>';
+    $xml = '<shiftxml:diffoperations xmlns:shiftxml="namespace://autotheme.de/ns/shiftxml"/>';
     $this->document->loadXml($xml);
     $this->document_ready = false;
 
@@ -75,7 +75,7 @@ class shiftxml_document
     $document_elements = $xpath->query($xpath_query);
     
     $shiftxml_tag = 'shiftxml:'.$command;
-    $template = $this->document->createElementNS('namespace://dontcode.de/ns/shiftxml',$shiftxml_tag,'');
+    $template = $this->document->createElementNS('namespace://autotheme.de/ns/shiftxml',$shiftxml_tag,'');
     $newnode = $document_elements[0]->appendChild($template);
        
     $has_child_appended_if_given = false;
@@ -117,7 +117,7 @@ class shiftxml_document
           foreach($attributes as $attribute_name=>$attribute_value)
             if(is_string($attribute_name)&&((is_string($attribute_value)||($attribute_value==null))))
             {
-              $attrNS = $this->document->createAttributeNS('namespace://dontcode.de/ns/'.$command, $command.':'.$attribute_name ); 
+              $attrNS = $this->document->createAttributeNS('namespace://autotheme.de/ns/'.$command, $command.':'.$attribute_name ); 
               if(is_string($attribute_value))
                 $attrNS->value = $attribute_value;
               if($element->appendChild($attrNS)==false)
