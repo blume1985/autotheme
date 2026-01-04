@@ -5,7 +5,7 @@
 <?php
 
   $version = "25.2";
-  include_once($_SERVER['DOCUMENT_ROOT']."/lib_dontcode/dontcode_requesthandler.php");
+  include_once($_SERVER['DOCUMENT_ROOT']."/lib_autotheme/autotheme_requesthandler.php");
   if(empty(session_id)) session_start();
 
   class dices_model
@@ -183,10 +183,10 @@
 
     function run_app()
     {
-      $dontcode_requesthandler = new dontcode_requesthandler(true);
+      $autotheme_requesthandler = new autotheme_requesthandler(true);
       
       echo $this->view->display_main($values);
-      $dontcode_requesthandler->stop_request();
+      $autotheme_requesthandler->stop_request();
     }
   }
   class dices_view 
