@@ -7,9 +7,9 @@
   class autotheme_pagecache
   {
     const UNITTEST_MYSQL_HOST = 'localhost';
-    const UNITTEST_MYSQL_USER = 'autotheme_de_fix';
-    const UNITTEST_MYSQL_PASS = 'v?u1rp&sDJzOOo!N';
-    const UNITTEST_MYSQL_BANK = 'autotheme_de_fix';
+    const UNITTEST_MYSQL_USER = 'enter here';
+    const UNITTEST_MYSQL_PASS = 'enter here';
+    const UNITTEST_MYSQL_BANK = 'enter here';
 
     private $dir_cache = "./_cache/";
     private $mysqli_connection = null;
